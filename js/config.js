@@ -4,7 +4,7 @@
 
 // ---------- CONFIGURACIÓN ----------
 // ID del bin de JSONBin (jsonbin.io). Cópialo de la ficha del bin.
-const JSONBIN_ID = "PEGA_AQUI_EL_ID_DEL_BIN";
+const JSONBIN_ID = "6aff6d97ac6210605a95e5f6";
 const BACKEND_URL = "https://api.jsonbin.io/v3/b/" + JSONBIN_ID + "/latest";
 const TELEFONO_WA = "34620419157";   // teléfono para los enlaces de WhatsApp
 const TELEFONO_TXT = "620 419 157";  // cómo se muestra en la web
