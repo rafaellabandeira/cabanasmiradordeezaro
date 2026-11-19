@@ -93,4 +93,3 @@ document.addEventListener("DOMContentLoaded", () => {
   $("ent").addEventListener("change", () => { if ($("ent").value && !$("sal").value) $("sal").value = aIso(mas(aFecha($("ent").value), 1)); });
   if ($("clave").value) cargar();
 });
-
