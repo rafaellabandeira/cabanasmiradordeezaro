@@ -1,1 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel de reservas</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="css/style.css">
+<style>.panel{background:var(--card);border-radius:16px;padding:1.1rem;max-width:36rem;margin:1rem 0;box-shadow:0 2px 14px rgba(10,40,48,.12)}
+#msg{margin:.8rem 0;font-weight:600}.ok{color:#1b7a3a}.err{color:#c62828}
+.rango{display:flex;justify-content:space-between;align-items:center;gap:.6rem;border-bottom:1px solid var(--line);padding:.5rem 0}
+.rango button{background:none;border:1.5px solid var(--line);border-radius:8px;padding:.3rem .7rem;color:var(--ink);cursor:pointer;font:inherit}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}.dos .btn{margin-top:.8rem}</style>
+</head>
+<body>
+<nav><b>Panel de reservas</b><span><a href="index.html">Ver la web</a></span></nav>
+<main><section><div class="wrap">
+<h1>Bloquear fechas</h1>
+<p class="intro">Aquí marcas las noches ocupadas de cada cabaña. La web las muestra como no disponibles.</p>
 
+<div class="panel">
+<h2 style="font-size:1.2rem">1. Clave de JSONBin</h2>
+<label for="tipo">Tipo de clave</label>
+<select id="tipo"><option value="master">Master Key</option><option value="access">Access Key</option></select>
+<label for="clave">Clave (se guarda solo en este dispositivo)</label>
+<input type="password" id="clave" autocomplete="off">
+<button class="btn" id="btnCargar" type="button" style="margin-top:.8rem">Cargar reservas</button>
+</div>
+<p id="msg" role="status"></p>
+
+<div class="panel" id="editor" style="display:none">
+<h2 style="font-size:1.2rem">2. Cabaña y fechas</h2>
+<label for="cab">Cabaña</label><select id="cab"></select>
+<div class="dos">
+<div><label for="ent">Entrada</label><input type="date" id="ent"></div>
+<div><label for="sal">Salida</label><input type="date" id="sal"></div>
+</div>
+<div class="dos">
+<button class="btn" id="btnBloq" type="button">Bloquear noches</button>
+<button class="btn" id="btnDesb" type="button" style="background:#5d706a">Liberar noches</button>
+</div>
+<p class="note" style="font-size:.85rem;color:var(--muted)">Se bloquean las noches desde la entrada hasta el día antes de la salida. El día de salida queda libre para otra entrada.</p>
+<h2 style="font-size:1.1rem;margin-top:1.2rem">Noches bloqueadas</h2>
+<div id="lista"></div>
+<button class="btn" id="btnLimpiar" type="button" style="background:#5d706a;margin-top:1rem">Borrar fechas ya pasadas</button>
+</div>
+</div></section></main>
+<script src="js/config.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
