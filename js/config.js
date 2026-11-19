@@ -3,7 +3,9 @@
 // Se carga antes que main.js.
 
 // ---------- CONFIGURACIÓN ----------
-const BACKEND_URL = "https://TU-SERVIDOR.onrender.com/reservas"; // TODO: servidor de Ézaro
+// ID del bin de JSONBin (jsonbin.io). Cópialo de la ficha del bin.
+const JSONBIN_ID = "PEGA_AQUI_EL_ID_DEL_BIN";
+const BACKEND_URL = "https://api.jsonbin.io/v3/b/" + JSONBIN_ID + "/latest";
 const TELEFONO_WA = "34620419157";   // teléfono para los enlaces de WhatsApp
 const TELEFONO_TXT = "620 419 157";  // cómo se muestra en la web
 const ANTICIPO = 100;                // importe que se paga ahora
