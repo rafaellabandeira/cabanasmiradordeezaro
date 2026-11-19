@@ -1,12 +1,11 @@
-
-// ================= CONFIG.JS - CABAÑAS DO ÉZARO =================
+// ================= CONFIG.JS - CABAÑAS MIRADOR DE ÉZARO =================
 // Aquí se cambian precios, anticipo, teléfono y datos de las cabañas.
 // Se carga antes que main.js.
 
 // ---------- CONFIGURACIÓN ----------
 const BACKEND_URL = "https://TU-SERVIDOR.onrender.com/reservas"; // TODO: servidor de Ézaro
-const TELEFONO_WA = "34620419157";   // TODO: teléfono real (para los enlaces de WhatsApp)
-const TELEFONO_TXT = "620419157";  // cómo se muestra en la web
+const TELEFONO_WA = "34620419157";   // teléfono para los enlaces de WhatsApp
+const TELEFONO_TXT = "620 419 157";  // cómo se muestra en la web
 const ANTICIPO = 100;                // importe que se paga ahora
 const MIN_NOCHES = 1;                // TODO: confirmar mínimo de noches
 const RECARGO_TEMP_ALTA = 0.10;      // +10 % del 15 de julio al 20 de agosto
