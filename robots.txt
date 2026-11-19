@@ -1,4 +1,3 @@
-
 User-agent: *
 Allow: /
-Sitemap: https://cabanasdoezaro.es/sitemap.xml
+Sitemap: https://cabanasmiradordeezaro.es/sitemap.xml
