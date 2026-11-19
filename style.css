@@ -76,4 +76,9 @@ footer{padding:1.8rem 1rem 5rem;color:var(--muted);font-size:.88rem;text-align:c
 .tag{background:var(--soft);color:var(--deep);border-radius:999px;padding:.2rem .65rem;font-size:.8rem;font-weight:500;white-space:nowrap}
 .hero .tags{margin:.7rem 0 .4rem}
 .hero .tag{background:rgba(255,255,255,.16);color:#fff}
-
+.pend{background:#fff3a8;color:#4a3b00;padding:0 .3em;border-radius:4px;font-weight:600}
+.legal h2{margin-top:1.6rem;font-size:1.3rem}
+.legal ul{padding-left:1.2rem}
+.legal li{margin:.3rem 0}
+.legal table{border-collapse:collapse;width:100%;font-size:.92rem;margin:.6rem 0}
+.legal th,.legal td{border:1px solid var(--line);padding:.5rem;text-align:left;vertical-align:top}
