@@ -1,4 +1,4 @@
-// ================= MAIN.JS - CABAÑAS DO ÉZARO =================
+// ================= MAIN.JS - CABAÑAS MIRADOR DE ÉZARO =================
 // Flujo: el cliente elige fechas y personas, y el sistema muestra las cabañas libres.
 
 // Requiere js/config.js (CABANAS, BACKEND_URL, ANTICIPO, etc.), cargado antes.
