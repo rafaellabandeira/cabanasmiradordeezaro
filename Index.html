@@ -1,1 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Pega aquí tu código de Google Tag Manager si lo vas a usar -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cabañas con jacuzzi en O Ézaro (Dumbría) | Cabañas do Ézaro</title>
+<meta name="description" content="Cabañas con jacuzzi y desayuno en O Ézaro, Dumbría (A Coruña): 12 cabañas entre robles, con wifi. Elige fechas y reserva directo.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#17404a">
+<link rel="canonical" href="https://cabanasdoezaro.es/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="Cabañas do Ézaro">
+<meta property="og:title" content="Cabañas con jacuzzi en O Ézaro (Dumbría) | Cabañas do Ézaro">
+<meta property="og:description" content="12 cabañas en la Costa da Morte, 8 con jacuzzi privado. Elige fechas y reserva directo.">
+<meta property="og:url" content="https://cabanasdoezaro.es/">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"LodgingBusiness","name":"Cabañas do Ézaro","url":"https://cabanasdoezaro.es/","description":"Doce cabañas rurales en O Ézaro, Dumbría (A Coruña), ocho de ellas con jacuzzi privado, cerca de la Fervenza do Ézaro y el Monte Pindo.","numberOfRooms":12,"checkinTime":"16:00","checkoutTime":"12:00","address":{"@type":"PostalAddress","addressLocality":"O Ézaro, Dumbría","addressRegion":"A Coruña, Galicia","addressCountry":"ES"},"amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Jacuzzi privado","value":true},{"@type":"LocationFeatureSpecification","name":"Wifi gratuito","value":true}]}
+</script>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Cómo se calculan los precios?", "acceptedAnswer": {"@type": "Answer", "text": "El precio depende de la cabaña, del día de la semana y de la temporada. Las noches de viernes, sábado y festivos tienen la tarifa habitual; entre semana algunas cabañas son más baratas, y en pleno verano hay un recargo. El buscador te muestra el total exacto de tu estancia."}}, {"@type": "Question", "name": "¿Qué diferencia hay entre las cabañas con jacuzzi?", "acceptedAnswer": {"@type": "Answer", "text": "Mónica es la cabaña accesible: tiene rampa de acceso y jacuzzi de 180×90 cm. Ainhoa, Raquel, Hugo, Noa, Andrea y Paula tienen jacuzzi interior de 180×130 cm. Alborés tiene el jacuzzi de 180×130 cm en una cabaña anexa. Hugo, Andrea, Paula y Noa tienen amplias terrazas soleadas con vistas; Mónica, Ainhoa y Raquel, terrazas cubiertas entre robles."}}, {"@type": "Question", "name": "¿Qué cabañas son para grupos?", "acceptedAnswer": {"@type": "Answer", "text": "A Moa, O Pindo, Xallas y A Ruña: dos habitaciones y sofá cama, con capacidad para 6 personas y terraza cubierta entre robles. No tienen jacuzzi."}}, {"@type": "Question", "name": "¿Incluye desayuno?", "acceptedAnswer": {"@type": "Answer", "text": "Sí, en las ocho cabañas con jacuzzi. Las cabañas para 6 personas no lo incluyen."}}, {"@type": "Question", "name": "¿Hay wifi?", "acceptedAnswer": {"@type": "Answer", "text": "Sí, en todas las cabañas."}}, {"@type": "Question", "name": "¿Se admiten mascotas?", "acceptedAnswer": {"@type": "Answer", "text": "Solo en las cabañas para 6 personas (A Moa, O Pindo, Xallas y A Ruña), con un máximo de 1 mascota por cabaña."}}, {"@type": "Question", "name": "¿Hay alguna cabaña accesible?", "acceptedAnswer": {"@type": "Answer", "text": "Sí, la Cabaña Mónica tiene rampa de acceso y un jacuzzi de 180×90 cm."}}, {"@type": "Question", "name": "¿Cómo se paga el resto de la estancia?", "acceptedAnswer": {"@type": "Answer", "text": "Con el anticipo confirmas la reserva y el resto se paga en destino. Confirma con nosotros el método de pago."}}, {"@type": "Question", "name": "¿Cómo llegar a las cabañas?", "acceptedAnswer": {"@type": "Answer", "text": "Estamos en O Ézaro, Dumbría (A Coruña). Busca «O Ézaro, Dumbría» en Google Maps."}}]}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav aria-label="Principal"><b>Cabañas do Ézaro</b><span><a href="#cabanas-jacuzzi">Cabañas</a><a href="#contacto">Contacto</a></span></nav>
+
+<header class="hero"><div class="wrap">
+<h1>Cabañas con jacuzzi en O Ézaro, Costa da Morte</h1>
+<p>Doce cabañas en O Ézaro, ocho con jacuzzi privado y desayuno incluido. Elige tus fechas y reserva directo.</p>
+<form class="buscador" onsubmit="return false" aria-label="Buscar disponibilidad">
+  <div class="row">
+    <div><label for="ent">Entrada</label><input type="date" id="ent"></div>
+    <div><label for="sal">Salida</label><input type="date" id="sal"></div>
+  </div>
+  <label for="per">Personas</label>
+  <select id="per"></select>
+  <label class="chk" for="soloJacuzzi"><input type="checkbox" id="soloJacuzzi"> Solo cabañas con jacuzzi</label>
+  <button class="btn" id="btnBuscar" type="button">Ver disponibilidad</button>
+  <div id="avisoCarga" role="status">⏳ Cargando la disponibilidad, puede tardar hasta un minuto. Si no aparece, recarga la página.</div>
+  <p class="aviso">💶 Reserva con solo <span data-anticipo></span> · el resto, en destino</p>
+</form>
+</div></header>
+
+<main>
+
+<section id="disponibles" aria-labelledby="h-disp"><div class="wrap">
+<h2 class="sr-only" id="h-disp">Cabañas disponibles en tus fechas</h2>
+<div id="resultados" aria-live="polite"></div>
+<div id="pasoDatos">
+  <h3>Tu reserva</h3>
+  <div id="resumenReserva"></div>
+  <label for="nombre">Nombre completo</label><input type="text" id="nombre" placeholder="Nombre" autocomplete="name">
+  <label for="telefono">Teléfono</label><input type="tel" id="telefono" placeholder="Teléfono" autocomplete="tel">
+  <label for="email">Email</label><input type="email" id="email" placeholder="Email" autocomplete="email">
+  <div class="cond">
+    <p>✅ Con el anticipo de <span data-anticipo></span> confirmas tu reserva. El resto se paga en destino.</p>
+    <p>🔄 Cancelación gratis hasta 15 días antes de la llegada.</p>
+    <p>🕒 Entrada a partir de las 16:00 · Salida antes de las 12:00</p>
+  </div>
+  <label class="chk" for="aceptoPrivacidad"><input type="checkbox" id="aceptoPrivacidad">
+    <span>He leído y acepto la <a href="privacidad.html" target="_blank" rel="noopener">política de privacidad</a> y el <a href="aviso-legal.html" target="_blank" rel="noopener">aviso legal</a>.</span></label>
+  <button class="btn" id="btnPagar" type="button">Reservar</button>
+</div>
+</div></section>
+
+<section id="cabanas-jacuzzi" aria-labelledby="h-jac"><div class="wrap">
+<h2 id="h-jac">Cabañas con jacuzzi privado en O Ézaro</h2>
+<p class="intro">Ocho cabañas con jacuzzi privado, wifi y desayuno incluido: siete en alto, entre las ramas de los árboles, y una a un metro del suelo con jardín.</p>
+<div class="grid">
+<article class="cabin"><div class="ph jac">🛁 Con jacuzzi</div>
+  <div class="body"><h3><a href="cabana-monica.html">Cabaña Mónica: cabaña accesible con jacuzzi en O Ézaro</a></h3><p>Para 2 personas. A unos 2 metros del suelo, a la altura de las ramas de los árboles, con rampa de acceso. Cabaña accesible con jacuzzi interior de 180×90 cm, terraza cubierta, wifi y desayuno incluido.</p><p>👥 2 personas</p>
+  <a class="more" href="cabana-monica.html">Ver cabaña</a>
+  <p class="price" data-precio="monica"></p></div></article>
+<article class="cabin"><div class="ph jac">🛁 Con jacuzzi</div>
+  <div class="body"><h3><a href="cabana-ainhoa.html">Cabaña Ainhoa: refugio entre robles con jacuzzi</a></h3><p>Elevada a más de 2 metros del suelo, entre las ramas de los robles, con una terraza cubierta muy íntima. Jacuzzi interior de 180×130 cm, wifi y desayuno incluido.</p><p>👥 2 adultos + 1 niño</p>
+  <a class="more" href="cabana-ainhoa.html">Ver cabaña</a>
+  <p class="price" data-precio="ainhoa"></p></div></article>
+<article class="cabin"><div class="ph jac">🛁 Con jacuzzi</div>
+  <div class="body"><h3><a href="cabana-raquel.html">Cabaña Raquel: jacuzzi y privacidad entre robles</a></h3><p>A la altura de las copas de los robles, para desconectar con total privacidad. Terraza cubierta, jacuzzi interior de 180×130 cm, wifi y desayuno incluido.</p><p>👥 2 adultos + 1 niño</p>
+  <a class="more" href="cabana-raquel.html">Ver cabaña</a>
+  <p class="price" data-precio="raquel"></p></div></article>
+<article class="cabin"><div class="ph jac">🛁 Con jacuzzi</div>
+  <div class="body"><h3><a href="cabana-hugo.html">Cabaña Hugo: terraza soleada con vistas al pantano de Santa Uxía</a></h3><p>En alto, entre los árboles, con amplia terraza soleada y vistas al Monte da Ruña y al pantano de Santa Uxía. Jacuzzi interior de 180×130 cm, wifi y desayuno incluido.</p><p>👥 2 adultos + 1 niño</p>
+  <a class="more" href="cabana-hugo.html">Ver cabaña</a>
+  <p class="price" data-precio="hugo"></p></div></article>
+<article class="cabin"><div class="ph jac">🛁 Con jacuzzi</div>
+  <div class="body"><h3><a href="cabana-noa.html">Cabaña Noa: terraza con vistas al Monte Pindo</a></h3><p>En alto, a más de 2 metros del suelo, con amplia terraza soleada y vistas al Monte Pindo y al Monte da Ruña. Jacuzzi interior de 180×130 cm, wifi y desayuno incluido.</p><p>👥 2 adultos + 2 niños</p>
+  <a class="more" href="cabana-noa.html">Ver cabaña</a>
+  <p class="price" data-precio="noa"></p></div></article>
+<article class="cabin"><div class="ph jac">🛁 Con jacuzzi</div>
+  <div class="body"><h3><a href="cabana-andrea.html">Cabaña Andrea: jacuzzi con vistas al Monte da Ruña</a></h3><p>A más de 2 metros del suelo, con gran terraza al sol y vistas al Monte da Ruña y al pantano. Jacuzzi interior de 180×130 cm, wifi y desayuno incluido.</p><p>👥 2 adultos + 2 niños</p>
+  <a class="more" href="cabana-andrea.html">Ver cabaña</a>
+  <p class="price" data-precio="andrea"></p></div></article>
+<article class="cabin"><div class="ph jac">🛁 Con jacuzzi</div>
+  <div class="body"><h3><a href="cabana-paula.html">Cabaña Paula: jacuzzi y vistas a la altura de las ramas</a></h3><p>Construida a la altura de las ramas de los árboles, con amplia terraza soleada frente al pantano de Santa Uxía. Jacuzzi interior de 180×130 cm, wifi y desayuno incluido.</p><p>👥 2 adultos + 2 niños</p>
+  <a class="more" href="cabana-paula.html">Ver cabaña</a>
+  <p class="price" data-precio="paula"></p></div></article>
+<article class="cabin"><div class="ph jac">🛁 Con jacuzzi</div>
+  <div class="body"><h3><a href="cabana-albores.html">Cabaña Alborés: jacuzzi y jardín en O Ézaro</a></h3><p>A un metro del suelo y rodeada de un precioso jardín. Jacuzzi de 180×130 cm en una cabaña anexa, wifi y desayuno incluido.</p><p>👥 2 adultos + 2 niños</p>
+  <a class="more" href="cabana-albores.html">Ver cabaña</a>
+  <p class="price" data-precio="albores"></p></div></article>
+</div>
+</div></section>
+
+<section id="cabanas-grupos" aria-labelledby="h-grp"><div class="wrap">
+<h2 id="h-grp">Cabañas para grupos de hasta 6 personas</h2>
+<p class="intro">Cuatro cabañas con dos habitaciones, sofá cama, terraza cubierta entre robles y wifi, pensadas para familias y grupos de amigos.</p>
+<div class="grid">
+<article class="cabin"><div class="ph grp">🏡 Para grupos</div>
+  <div class="body"><h3><a href="cabana-amoa.html">Cabaña A Moa: cabaña para 6 personas entre robles</a></h3><p>Dos habitaciones y sofá cama, sin jacuzzi. Terraza cubierta, totalmente metida entre robles. Wifi.</p><p>👥 6 personas</p>
+  <a class="more" href="cabana-amoa.html">Ver cabaña</a>
+  <p class="price" data-precio="amoa"></p></div></article>
+<article class="cabin"><div class="ph grp">🏡 Para grupos</div>
+  <div class="body"><h3><a href="cabana-opindo.html">Cabaña O Pindo: cabaña para grupos junto al Monte Pindo</a></h3><p>Dos habitaciones y sofá cama, sin jacuzzi. Terraza cubierta rodeada de robles, ideal para grupos. Wifi.</p><p>👥 6 personas</p>
+  <a class="more" href="cabana-opindo.html">Ver cabaña</a>
+  <p class="price" data-precio="opindo"></p></div></article>
+<article class="cabin"><div class="ph grp">🏡 Para grupos</div>
+  <div class="body"><h3><a href="cabana-xallas.html">Cabaña Xallas: cabaña para 6 cerca del río Xallas</a></h3><p>Dos habitaciones y sofá cama, sin jacuzzi. Terraza cubierta y cabaña rodeada de robles. Wifi.</p><p>👥 6 personas</p>
+  <a class="more" href="cabana-xallas.html">Ver cabaña</a>
+  <p class="price" data-precio="xallas"></p></div></article>
+<article class="cabin"><div class="ph grp">🏡 Para grupos</div>
+  <div class="body"><h3><a href="cabana-aruna.html">Cabaña A Ruña: cabaña para 6 en plena arboleda</a></h3><p>Dos habitaciones y sofá cama, sin jacuzzi. Terraza cubierta, totalmente integrada entre los robles. Wifi.</p><p>👥 6 personas</p>
+  <a class="more" href="cabana-aruna.html">Ver cabaña</a>
+  <p class="price" data-precio="aruna"></p></div></article>
+</div>
+</div></section>
+
+<section id="faq" aria-labelledby="h-faq"><div class="wrap">
+<h2 id="h-faq">Preguntas frecuentes</h2>
+<details open><summary>¿Cómo se calculan los precios?</summary><p>El precio depende de la cabaña, del día de la semana y de la temporada. Las noches de viernes, sábado y festivos tienen la tarifa habitual; entre semana algunas cabañas son más baratas, y en pleno verano hay un recargo. El buscador te muestra el total exacto de tu estancia.</p></details>
+<details><summary>¿Qué diferencia hay entre las cabañas con jacuzzi?</summary><p>Mónica es la cabaña accesible: tiene rampa de acceso y jacuzzi de 180×90 cm. Ainhoa, Raquel, Hugo, Noa, Andrea y Paula tienen jacuzzi interior de 180×130 cm. Alborés tiene el jacuzzi de 180×130 cm en una cabaña anexa. Hugo, Andrea, Paula y Noa tienen amplias terrazas soleadas con vistas; Mónica, Ainhoa y Raquel, terrazas cubiertas entre robles.</p></details>
+<details><summary>¿Qué cabañas son para grupos?</summary><p>A Moa, O Pindo, Xallas y A Ruña: dos habitaciones y sofá cama, con capacidad para 6 personas y terraza cubierta entre robles. No tienen jacuzzi.</p></details>
+<details><summary>¿Incluye desayuno?</summary><p>Sí, en las ocho cabañas con jacuzzi. Las cabañas para 6 personas no lo incluyen.</p></details>
+<details><summary>¿Hay wifi?</summary><p>Sí, en todas las cabañas.</p></details>
+<details><summary>¿Se admiten mascotas?</summary><p>Solo en las cabañas para 6 personas (A Moa, O Pindo, Xallas y A Ruña), con un máximo de 1 mascota por cabaña.</p></details>
+<details><summary>¿Hay alguna cabaña accesible?</summary><p>Sí, la Cabaña Mónica tiene rampa de acceso y un jacuzzi de 180×90 cm.</p></details>
+<details><summary>¿Cómo se paga el resto de la estancia?</summary><p>Con el anticipo confirmas la reserva y el resto se paga en destino. Confirma con nosotros el método de pago.</p></details>
+<details><summary>¿Cómo llegar a las cabañas?</summary><p>Estamos en O Ézaro, Dumbría (A Coruña). Busca «O Ézaro, Dumbría» en Google Maps. <a href="https://www.google.com/maps/search/?api=1&query=O%20%C3%89zaro%2C%20Dumbr%C3%ADa" target="_blank" rel="noopener">Abrir en Google Maps</a></p></details>
+</div></section>
+
+<section id="zona" aria-labelledby="h-zona"><div class="wrap">
+<h2 id="h-zona">Qué hacer cerca de las cabañas en O Ézaro</h2>
+<ul class="list">
+<li><h3>Fervenza do Ézaro</h3><p>La cascada del río Xallas cae directamente al mar.</p></li>
+<li><h3>Praia do Ézaro</h3><p>Playa a pocos minutos de las cabañas.</p></li>
+<li><h3>Monte Pindo</h3><p>Rutas de senderismo con vistas al Atlántico.</p></li>
+<li><h3>Fisterra y Muxía</h3><p>Faros y costa a menos de una hora.</p></li>
+</ul>
+</div></section>
+
+<section id="contacto" aria-labelledby="h-cont"><div class="wrap">
+<div class="contacto">
+<h2 id="h-cont">Reservas personalizadas</h2>
+<p>Las reservas también se pueden gestionar por WhatsApp para una atención más personalizada.</p>
+<a class="btn wa js-wa" href="#" target="_blank" rel="noopener">📱 WhatsApp <span data-telefono></span></a>
+</div>
+</div></section>
+
+</main>
+
+<footer>
+<p><a href="aviso-legal.html">Aviso legal</a> | <a href="privacidad.html">Política de privacidad</a> | <a href="cookies.html">Política de cookies</a></p>
+<p>© 2026 cabanasdoezaro.es · O Ézaro, Dumbría (A Coruña)</p>
+</footer>
+
+<a href="#" class="js-wa" id="whatsappButton" target="_blank" rel="noopener" title="Escríbenos por WhatsApp" aria-label="Escríbenos por WhatsApp">💬</a>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
 
