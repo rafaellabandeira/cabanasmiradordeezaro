@@ -17,23 +17,33 @@ function sumarDias(date, n) { const d = new Date(date); d.setDate(d.getDate() + 
 function formato(date) { return date.toLocaleDateString("es-ES", { day: "numeric", month: "short", year: "numeric" }); }
 
 // ---------- CARGA DE RESERVAS ----------
-// El servidor responde { monica: [...], bloqueados_monica: [...], ... }
+// El bin de JSONBin guarda { monica: [...], bloqueados_monica: [...], ... } (noches ocupadas)
 let bloqueadas = null;     // { id: Set de noches ocupadas o bloqueadas }
 let cargaFallida = true;
 let reintentos = 0;
 
 async function cargarReservasBackend() {
   try {
-    const control = new AbortController();
-    const t = setTimeout(() => control.abort(), 30000);
-    const res = await fetch(BACKEND_URL, { signal: control.signal });
-    clearTimeout(t);
-    if (!res.ok) throw new Error("Error " + res.status);
-    const data = await res.json();
+    // Caché de 5 minutos en el navegador: menos peticiones a JSONBin
+    let d = null;
+    try {
+      const g = JSON.parse(sessionStorage.getItem("ezaro_reservas") || "null");
+      if (g && Date.now() - g.t < 300000) d = g.d;
+    } catch (e) {}
+    if (!d) {
+      const control = new AbortController();
+      const t = setTimeout(() => control.abort(), 15000);
+      const res = await fetch(BACKEND_URL, { signal: control.signal });
+      clearTimeout(t);
+      if (!res.ok) throw new Error("Error " + res.status);
+      const data = await res.json();
+      d = data.record || data;     // JSONBin envuelve los datos en "record"
+      try { sessionStorage.setItem("ezaro_reservas", JSON.stringify({ t: Date.now(), d })); } catch (e) {}
+    }
     const r = {};
     for (const c of CABANAS) {
-      const ocupadas = (data[c.id] || []).map(f => f.slice(0, 10));
-      const bloqueos = data["bloqueados_" + c.id] || [];
+      const ocupadas = (d[c.id] || []).map(f => f.slice(0, 10));
+      const bloqueos = d["bloqueados_" + c.id] || [];
       r[c.id] = new Set(ocupadas.concat(bloqueos));
     }
     return r;
