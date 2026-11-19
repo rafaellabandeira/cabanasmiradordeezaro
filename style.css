@@ -1,1 +1,79 @@
+:root{--bg:#f4f1ea;--card:#fff;--ink:#1a2e2b;--muted:#5d706a;--deep:#17404a;--mid:#2b6f7d;--soft:#d8ebee;--line:#e2ddd0;--accent:#e07b00}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1a1d;--card:#15262b;--ink:#e6efee;--muted:#9db3b0;--deep:#8cc6d2;--mid:#6fb1bf;--soft:#1d3a41;--line:#26393e;color-scheme:dark}}
+html{scroll-behavior:smooth;scroll-padding-top:12px}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 "DM Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;margin:0;color:var(--deep);line-height:1.15}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:70rem;margin:0 auto;padding:0 1.1rem}
+nav{background:#17404a;color:#fff;display:flex;justify-content:space-between;align-items:center;padding:.8rem 1.1rem}
+nav b{font:600 1.05rem Fraunces,Georgia,serif}
+nav a{text-decoration:none;font-size:.9rem;margin-left:.9rem;color:#cfe6ea}
+.hero{background:linear-gradient(rgba(10,30,36,.35),rgba(10,30,36,.85)),linear-gradient(135deg,#2b6f7d,#17404a 60%,#0e2a30);color:#fff;padding:2.2rem 0 2.4rem}
+.hero h1{color:#fff;font-size:clamp(1.9rem,7vw,3.2rem);font-weight:600}
+.hero p{font-weight:300;margin:.6rem 0 1.3rem;max-width:34rem}
+.buscador{background:var(--card);color:var(--ink);border-radius:16px;padding:1.1rem;max-width:40rem;box-shadow:0 6px 24px rgba(0,0,0,.25)}
+.buscador .row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+label{display:block;font-weight:600;font-size:.88rem;margin:.7rem 0 .25rem}
+select,input[type=date],input[type=text],input[type=tel],input[type=email]{width:100%;font:inherit;padding:.7rem;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+.chk{display:flex;gap:.5rem;align-items:center;font-weight:500;margin-top:.8rem}
+.chk input{width:20px;height:20px;accent-color:var(--mid);flex-shrink:0}
+.btn{display:block;width:100%;background:var(--accent);color:#fff;border:0;border-radius:10px;padding:.9rem 1.2rem;font:600 1rem "DM Sans",sans-serif;text-align:center;text-decoration:none;cursor:pointer}
+.buscador .btn{margin-top:1rem;font-size:1.1rem}
+.btn.wa{background:#1fa855;display:inline-block;width:auto}
+#avisoCarga{display:none;background:#fff3cd;color:#664d03;border-radius:10px;padding:.6rem .9rem;margin-top:.8rem;font-size:.9rem}
+.aviso{font-size:.9rem;margin:.8rem 0 0;color:var(--muted)}
+section{padding:2.2rem 0}
+h2{font-size:clamp(1.5rem,5vw,2.1rem);margin-bottom:.6rem}
+.intro{color:var(--muted);max-width:42rem;margin:0 0 .4rem}
+.vacio{background:var(--card);border-radius:12px;padding:1rem;margin:1rem 0;color:var(--muted)}
+.resumen-busqueda{font-weight:600;color:var(--deep);margin:1rem 0 0}
+.grid{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fill,minmax(16rem,1fr));margin-top:1rem}
+.cabin{background:var(--card);border-radius:18px;overflow:hidden;box-shadow:0 2px 14px rgba(10,40,48,.1);display:flex;flex-direction:column}
+.ph{height:100px;display:flex;align-items:flex-end;padding:.7rem .9rem;color:#fff;font-size:.85rem}
+.ph.jac{background:linear-gradient(160deg,#2b6f7d,#17404a)}
+.ph.grp{background:linear-gradient(160deg,#6a7f4f,#2c4326)}
+.cabin .body{padding:1rem;display:flex;flex-direction:column;gap:.4rem;flex:1}
+.cabin h3{font-size:1.3rem}
+.cabin p{margin:0;color:var(--muted);font-size:.92rem}
+.price{font-weight:600;color:var(--ink)!important;font-size:1.15rem!important;margin-top:auto!important;padding-top:.4rem!important}
+.price small{font-weight:400;font-size:.8rem;color:var(--muted)}
+#pasoDatos{display:none;background:var(--card);border-radius:16px;padding:1.1rem;margin-top:1.2rem;max-width:34rem;box-shadow:0 2px 14px rgba(10,40,48,.12)}
+#pasoDatos p{margin:.2rem 0}
+#pasoDatos h3{margin-bottom:.4rem}
+.cond{background:var(--soft);border-radius:8px;padding:.6rem .8rem;font-size:.88rem;margin-top:.9rem}
+.cond p{margin:.2rem 0}
+#btnPagar{margin-top:1rem}
+details{background:var(--card);border:1.5px solid var(--line);border-radius:12px;margin-top:.5rem}
+summary{cursor:pointer;padding:.8rem 1rem;font-weight:600;color:var(--deep)}
+details p{margin:0;padding:0 1rem .9rem;color:var(--muted)}
+.list{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));padding:0;list-style:none;margin:1rem 0 0}
+.list li{border-left:4px solid var(--mid);padding-left:.9rem}
+.list h3{font:600 1.05rem "DM Sans",sans-serif}
+.contacto{background:#17404a;color:#cfe6ea;border-radius:16px;padding:1.3rem;text-align:center}
+.contacto h2{color:#fff}
+footer{padding:1.8rem 1rem 5rem;color:var(--muted);font-size:.88rem;text-align:center}
+#whatsappButton{position:fixed;right:1rem;bottom:1rem;width:58px;height:58px;border-radius:50%;background:#1fa855;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.7rem;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+
+.cabin h3 a{text-decoration:none;color:inherit}
+.cabin h3 a:hover{text-decoration:underline}
+.more{display:inline-block;margin-top:.3rem;font-weight:600;color:var(--mid)!important;font-size:.92rem}
+.crumbs{font-size:.85rem;margin:0 0 .8rem;color:#cfe6ea}
+.crumbs a{color:#cfe6ea}
+.hero .btn{display:inline-block;width:auto;margin-top:.4rem}
+.big-ph{height:200px;border-radius:16px;display:flex;align-items:flex-end;padding:1rem;color:#fff;margin:0 0 1.2rem}
+.big-ph.jac{background:linear-gradient(160deg,#2b6f7d,#17404a)}
+.big-ph.grp{background:linear-gradient(160deg,#6a7f4f,#2c4326)}
+.feat{list-style:none;padding:0;margin:.6rem 0 0;display:grid;gap:.5rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
+.feat li{background:var(--soft);color:var(--deep);border-radius:10px;padding:.6rem .8rem;font-weight:500}
+.otras{columns:2;list-style:none;padding:0;margin:.6rem 0 0}
+.otras li{margin:.3rem 0}
+.otras a{color:var(--mid);font-weight:500}
+.prose p{max-width:44rem}
+.tags{display:flex;flex-wrap:wrap;gap:.35rem;margin:.3rem 0}
+.tag{background:var(--soft);color:var(--deep);border-radius:999px;padding:.2rem .65rem;font-size:.8rem;font-weight:500;white-space:nowrap}
+.hero .tags{margin:.7rem 0 .4rem}
+.hero .tag{background:rgba(255,255,255,.16);color:#fff}
 
