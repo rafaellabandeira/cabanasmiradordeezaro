@@ -27,3 +27,21 @@ const CABANAS = [
   { id: "xallas",  nombre: "Cabaña Xallas",  precio: 150, sem: 150, max: 6, jacuzzi: false, desc: "Sin jacuzzi · 2 habitaciones y sofá cama · terraza cubierta entre robles", cap: "6 personas", tags: ["👥 6 personas", "🛏️ 2 habitaciones", "⛱️ Terraza cubierta", "🌳 Entre robles", "📶 Wifi", "👪 Familias y grupos"] },
   { id: "aruna",   nombre: "Cabaña A Ruña",  precio: 150, sem: 150, max: 6, jacuzzi: false, desc: "Sin jacuzzi · 2 habitaciones y sofá cama · terraza cubierta entre robles", cap: "6 personas", tags: ["👥 6 personas", "🛏️ 2 habitaciones", "⛱️ Terraza cubierta", "🌳 Entre robles", "📶 Wifi", "👪 Familias y grupos"] }
 ];
+
+// ---------- BONOS REGALO (enlaces de pago de Stripe) ----------
+const BONOS = {
+  uno: { noches: 1, precio: 195, url: "https://buy.stripe.com/00w5kCfJdffMfvFfs9aVa02" },
+  dos: { noches: 2, precio: 330, url: "https://buy.stripe.com/8x200i40v8RoerB2FnaVa01" }
+};
+
+// ---------- PACKS (precio por pack, se paga en destino) ----------
+const PACKS = [
+  { id: "decoracion", nombre: "Decoración romántica", precio: 20,
+    incluye: ["Decoración con pétalos de rosa y globos", "Caja de bombones"] },
+  { id: "bienvenida", nombre: "Decoración romántica con detalles de bienvenida", precio: 40,
+    incluye: ["Botella de cava premium", "Caja de bombones", "Cafés y detalles de bienvenida", "Decoración con pétalos de rosa"] },
+  { id: "cena", nombre: "Cena romántica con picoteo", precio: 80,
+    incluye: ["Gran bandeja de jamón ibérico, lomo ibérico y queso, con picos camperos", "Botella de Mencía tinto", "Botella de cava premium", "Caja de bombones", "Cafés y detalles de bienvenida"] },
+  { id: "completo", nombre: "Decoración romántica y cena de picoteo", precio: 90,
+    incluye: ["Gran bandeja de jamón ibérico, lomo ibérico y queso, con picos camperos", "Botella de Mencía tinto", "Botella de cava premium", "Caja de bombones", "Cafés y detalles de bienvenida", "Decoración con pétalos de rosa"] }
+];
