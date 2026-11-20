@@ -36,13 +36,24 @@ async function cargar() {
   } catch (e) { console.error(e); msg("No se pudieron cargar las reservas. Revisa el ID del bin en config.js.", false); }
 }
 
-async function guardar(texto) {
+const clonar = o => JSON.parse(JSON.stringify(o));
+
+// Guarda en JSONBin. Si falla, deshace el cambio y muestra el motivo.
+async function guardar(texto, anterior) {
   try {
     const res = await fetch(URL_BIN, { method: "PUT", headers: cabeceras(), body: JSON.stringify(datos) });
-    if (!res.ok) throw new Error(res.status);
+    if (!res.ok) {
+      let motivo = "";
+      try { motivo = (await res.json()).message || ""; } catch (e) {}
+      throw new Error("error " + res.status + (motivo ? ": " + motivo : ""));
+    }
     try { sessionStorage.removeItem("ezaro_reservas"); } catch (e) {}
     msg(texto, true);
-  } catch (e) { console.error(e); msg("No se pudo guardar. Inténtalo de nuevo.", false); }
+  } catch (e) {
+    console.error(e);
+    if (anterior) datos = anterior;
+    msg("No se pudo guardar (" + e.message + "). No se ha cambiado nada; pulsa «Cargar reservas» y vuelve a probar.", false);
+  }
   pintar();
 }
 
@@ -64,10 +75,11 @@ function pintar() {
 function cambiar(accion) {
   const e = $("ent").value, s = $("sal").value;
   if (!e || !s || aFecha(s) <= aFecha(e)) { msg("Elige una entrada y una salida posterior.", false); return; }
+  const anterior = clonar(datos);
   const id = $("cab").value, n = noches(e, s), set = new Set(datos[id]);
   n.forEach(x => accion === "bloq" ? set.add(x) : set.delete(x));
   datos[id] = Array.from(set).sort();
-  guardar(accion === "bloq" ? "Noches bloqueadas." : "Noches liberadas.");
+  guardar(accion === "bloq" ? "Noches bloqueadas." : "Noches liberadas.", anterior);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -81,14 +93,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const b = e.target.closest("[data-i]"); if (!b) return;
     const r = JSON.parse($("lista").dataset.r)[+b.dataset.i];
     const quitar = new Set(noches(r.ini, aIso(mas(aFecha(r.fin), 1))));
-    const id = $("cab").value;
+    const id = $("cab").value, anterior = clonar(datos);
     datos[id] = datos[id].filter(x => !quitar.has(x));
-    guardar("Noches liberadas.");
+    guardar("Noches liberadas.", anterior);
   });
   $("btnLimpiar").addEventListener("click", () => {
-    const hoy = aIso(new Date());
+    const hoy = aIso(new Date()), anterior = clonar(datos);
     for (const c of CABANAS) datos[c.id] = datos[c.id].filter(x => x >= hoy);
-    guardar("Fechas pasadas borradas.");
+    guardar("Fechas pasadas borradas.", anterior);
   });
   $("ent").addEventListener("change", () => { if ($("ent").value && !$("sal").value) $("sal").value = aIso(mas(aFecha($("ent").value), 1)); });
   if ($("clave").value) cargar();
