@@ -179,17 +179,38 @@ function buscar() {
   $("resultados").scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
+function packElegido() {
+  const r = document.querySelector('input[name="pack"]:checked');
+  return r && r.value !== "sin" ? PACKS.find(p => p.id === r.value) : null;
+}
+
+function pintarResumen() {
+  if (!seleccion) return;
+  const s = seleccion, pack = packElegido();
+  s.pack = pack;
+  const extra = pack ? pack.precio : 0;
+  $("resumenReserva").innerHTML =
+    `<p><strong>${s.cab.nombre}</strong></p>
+     <p>${formato(s.inicio)} → ${formato(s.fin)}</p>
+     <p><strong>Total estancia:</strong> ${s.total} €</p>` +
+    (pack ? `<p><strong>Pack:</strong> ${pack.nombre} · ${pack.precio} € (se paga en destino)</p>` : "") +
+    `<p><strong>Reserva ahora:</strong> ${ANTICIPO} €</p>
+     <p><strong>Resto a pagar en destino:</strong> ${s.total - ANTICIPO + extra} €</p>`;
+}
+
+function pintarPacks() {
+  $("packsOpciones").innerHTML =
+    `<label class="radio"><input type="radio" name="pack" value="sin" checked> <span>Sin pack</span></label>` +
+    PACKS.map(p => `<label class="radio"><input type="radio" name="pack" value="${p.id}"> <span><strong>${p.nombre}</strong> · ${p.precio} €<br><small>${p.incluye.join(" · ")}</small></span></label>`).join("");
+  $("packsOpciones").addEventListener("change", pintarResumen);
+}
+
 function elegirCabana(id) {
   const cab = POR_ID[id];
   const inicio = aFecha($("resultados").dataset.ent), fin = aFecha($("resultados").dataset.sal);
   const total = totalEstancia(cab, inicio, fin);
-  seleccion = { cab, inicio, fin, total, personas: +$("per").value };
-  $("resumenReserva").innerHTML =
-    `<p><strong>${cab.nombre}</strong></p>
-     <p>${formato(inicio)} → ${formato(fin)}</p>
-     <p><strong>Total estancia:</strong> ${total} €</p>
-     <p><strong>Reserva ahora:</strong> ${ANTICIPO} €</p>
-     <p><strong>Resto a pagar en destino:</strong> ${total - ANTICIPO} €</p>`;
+  seleccion = { cab, inicio, fin, total, personas: +$("per").value, pack: null };
+  pintarResumen();
   $("pasoDatos").style.display = "block";
   $("pasoDatos").scrollIntoView({ behavior: "smooth", block: "start" });
 }
@@ -204,7 +225,8 @@ function reservar() {
   if (!/\S+@\S+\.\S+/.test(email)) { alert("Introduce un email válido."); return; }
   if (!$("aceptoPrivacidad").checked) { alert("Debes aceptar la política de privacidad y el aviso legal."); return; }
   const s = seleccion;
-  const msg = `Hola, soy ${nombre} (${telefono}). Quiero reservar la ${s.cab.nombre} del ${formato(s.inicio)} al ${formato(s.fin)} para ${s.personas} ${s.personas === 1 ? "persona" : "personas"}. Total: ${s.total} €.`;
+  const pk = s.pack ? ` Pack elegido: ${s.pack.nombre} (${s.pack.precio} €, a pagar en destino).` : "";
+  const msg = `Hola, soy ${nombre} (${telefono}). Quiero reservar la ${s.cab.nombre} del ${formato(s.inicio)} al ${formato(s.fin)} para ${s.personas} ${s.personas === 1 ? "persona" : "personas"}. Total estancia: ${s.total} €.${pk}`;
   // Pago online todavía no activo: se confirma por WhatsApp
   alert("El pago online todavía no está activo.\n\nTe abrimos WhatsApp para confirmar la reserva.");
   window.open("https://wa.me/" + TELEFONO_WA + "?text=" + encodeURIComponent(msg), "_blank");
@@ -228,6 +250,7 @@ function pintarTextos() {
 
 document.addEventListener("DOMContentLoaded", () => {
   prepararPersonas();
+  pintarPacks();
   const hoy = fechaLocal(new Date());
   $("ent").min = hoy; $("sal").min = hoy;
   $("ent").addEventListener("change", () => {
