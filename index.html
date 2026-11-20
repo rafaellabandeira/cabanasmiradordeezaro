@@ -27,7 +27,7 @@
 </head>
 <body>
 
-<nav aria-label="Principal"><b>Cabañas Mirador de Ézaro</b><span><a href="#cabanas-jacuzzi">Cabañas</a><a href="#contacto">Contacto</a></span></nav>
+<nav aria-label="Principal"><b>Cabañas Mirador de Ézaro</b><span><a href="#cabanas-jacuzzi">Cabañas</a><a href="specialpack.html">Packs</a><a href="bono-regalo.html">Bono regalo</a><a href="#contacto">Contacto</a></span></nav>
 
 <header class="hero"><div class="wrap">
 <h1>Cabañas con jacuzzi cerca de O Ézaro, Costa da Morte</h1>
@@ -54,6 +54,9 @@
 <div id="pasoDatos">
   <h3>Tu reserva</h3>
   <div id="resumenReserva"></div>
+  <fieldset class="packs-box"><legend>¿Quieres añadir un pack?</legend>
+    <div id="packsOpciones"></div>
+    <p class="aviso">Los packs se pagan en destino y no suponen pago adicional para reservar.</p></fieldset>
   <label for="nombre">Nombre completo</label><input type="text" id="nombre" placeholder="Nombre" autocomplete="name">
   <label for="telefono">Teléfono</label><input type="tel" id="telefono" placeholder="Teléfono" autocomplete="tel">
   <label for="email">Email</label><input type="email" id="email" placeholder="Email" autocomplete="email">
@@ -142,6 +145,14 @@
 </div>
 </div></section>
 
+<section id="regalos" aria-labelledby="h-reg"><div class="wrap">
+<h2 id="h-reg">Packs románticos y bono regalo</h2>
+<div class="regala">
+<a class="regala-card" href="specialpack.html"><span class="ico">🌹</span><h3>Packs románticos</h3><p>Decoración, cena de picoteo y detalles de bienvenida para tu estancia. Se añaden al reservar y se pagan en destino.</p><span class="more">Ver los packs →</span></a>
+<a class="regala-card" href="bono-regalo.html"><span class="ico">🎁</span><h3>Bono regalo</h3><p>Regala una o dos noches con desayuno incluido. Compra online, de forma segura, con Stripe.</p><span class="more">Regalar una escapada →</span></a>
+</div>
+</div></section>
+
 <section id="faq" aria-labelledby="h-faq"><div class="wrap">
 <h2 id="h-faq">Preguntas frecuentes</h2>
 <details open><summary>¿Cómo se calculan los precios?</summary><p>El precio depende de la cabaña, del día de la semana y de la temporada. Las noches de viernes, sábado y festivos tienen la tarifa habitual; entre semana algunas cabañas son más baratas, y en pleno verano hay un recargo. El buscador te muestra el total exacto de tu estancia.</p></details>
@@ -176,6 +187,7 @@
 </main>
 
 <footer>
+<p><a href="specialpack.html">Packs</a> | <a href="bono-regalo.html">Bono regalo</a></p>
 <p><a href="aviso-legal.html">Aviso legal</a> | <a href="privacidad.html">Política de privacidad</a> | <a href="cookies.html">Política de cookies</a></p>
 <p>© 2026 cabanasmiradordeezaro.es · O Fieiro, Mazaricos (A Coruña)</p>
 </footer>
