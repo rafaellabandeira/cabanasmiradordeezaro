@@ -1,4 +1,3 @@
-
 // Carrusel de fotos: funciona sin JavaScript (desliza con el dedo); esto solo añade flechas y puntos.
 document.addEventListener("DOMContentLoaded", () => {
   const sinAnimacion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
