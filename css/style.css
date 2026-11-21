@@ -125,13 +125,6 @@ nav span{display:flex;flex-wrap:wrap;gap:.2rem 0}
 .upsell ul{padding-left:1.1rem;margin:.4rem 0}
 .upsell li{margin:.35rem 0}
 .upsell .btn{display:inline-block;width:auto}
-.medalla{position:fixed;top:5.2rem;right:.6rem;z-index:60;width:86px;height:86px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;text-decoration:none;line-height:1.05;color:#4a2f00;font-weight:700;background:radial-gradient(circle at 30% 22%,#fff1b8,#f0c239 52%,#b8860b);border:2px solid #fff3c4;box-shadow:0 4px 14px rgba(0,0,0,.4),inset 0 0 0 3px rgba(255,255,255,.5);transform:rotate(8deg)}
-.medalla small{font-size:.55rem;text-transform:uppercase;letter-spacing:.03em;padding:0 .35rem}
-.medalla b{font:600 1.35rem Fraunces,Georgia,serif}
-.medalla::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px dashed rgba(240,194,57,.9)}
-@media (prefers-reduced-motion:no-preference){.medalla{animation:latido 3.2s ease-in-out infinite}}
-@keyframes latido{0%,100%{transform:rotate(8deg) scale(1)}50%{transform:rotate(8deg) scale(1.07)}}
-@media (max-width:640px){.hero h1,.hero .wrap>p,.hero .crumbs{padding-right:5.4rem}}
 .of-grid{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));margin-top:1rem}
 .of-card{display:flex;flex-direction:column;background:var(--card);border-radius:18px;padding:1.3rem;box-shadow:0 2px 14px rgba(10,40,48,.1);border-top:5px solid #e0a800;text-decoration:none}
 .of-card .pp{font:600 2rem Fraunces,Georgia,serif;color:var(--deep);margin:.2rem 0}
@@ -139,3 +132,29 @@ nav span{display:flex;flex-wrap:wrap;gap:.2rem 0}
 .ok-list{list-style:none;padding:0;margin:.6rem 0}
 .ok-list li{margin:.45rem 0;padding-left:1.7rem;position:relative}
 .ok-list li::before{content:"✓";position:absolute;left:0;color:var(--mid);font-weight:700}
+.medalla{position:fixed;top:5rem;right:.6rem;z-index:60;width:124px;height:124px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;line-height:1.1;color:#4a2f00;background:radial-gradient(circle at 30% 22%,#fff1b8,#f0c239 52%,#b8860b);border:2px solid #fff3c4;box-shadow:0 4px 14px rgba(0,0,0,.4),inset 0 0 0 3px rgba(255,255,255,.5);transform:rotate(8deg)}
+.medalla::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px dashed rgba(240,194,57,.95);pointer-events:none}
+.m-txt{display:flex;flex-direction:column;align-items:center;padding:0 10px 0 18px;margin-top:-4px}
+.medalla small{font-size:11px;font-weight:600;line-height:1.1}
+.medalla b{font:600 1.5rem Fraunces,Georgia,serif;margin:.1rem 0}
+.medalla img{position:absolute;left:-20px;bottom:-14px;width:50px;height:50px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.45);transform:rotate(-8deg)}
+@media (prefers-reduced-motion:no-preference){.medalla{animation:latido 3.2s ease-in-out infinite}}
+@keyframes latido{0%,100%{transform:rotate(8deg) scale(1)}50%{transform:rotate(8deg) scale(1.06)}}
+@media (max-width:640px){.hero h1,.hero .wrap>p,.hero .crumbs{padding-right:8.6rem}}
+.carrusel{position:relative;max-width:38rem;margin:0 0 1.2rem;border-radius:16px;overflow:hidden;background:var(--soft)}
+.car-pista{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.car-pista::-webkit-scrollbar{display:none}
+.car-pista:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
+.car-slide{flex:0 0 100%;scroll-snap-align:center;margin:0}
+.car-slide img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover}
+.car-btn{display:none;position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:0;background:rgba(0,0,0,.5);color:#fff;font-size:1.7rem;line-height:1;align-items:center;justify-content:center;cursor:pointer;padding:0 0 .15rem}
+.carrusel.js .car-btn{display:flex}
+.car-prev{left:.5rem}.car-next{right:.5rem}
+.car-dots{display:none;position:absolute;left:0;right:0;bottom:.7rem;justify-content:center;gap:.5rem}
+.carrusel.js .car-dots{display:flex}
+.car-dots button{width:12px;height:12px;border-radius:50%;border:1.5px solid #fff;background:rgba(0,0,0,.25);padding:0;cursor:pointer}
+.car-dots button[aria-current="true"]{background:#fff}
+@media (prefers-reduced-motion:no-preference){.car-pista{scroll-behavior:smooth}}
+.ph-foto{position:relative;display:block;height:170px;overflow:hidden}
+.ph-foto img{width:100%;height:100%;object-fit:cover;display:block}
+.ph-tag{position:absolute;left:.7rem;bottom:.6rem;background:rgba(0,0,0,.62);color:#fff;border-radius:999px;padding:.15rem .7rem;font-size:.8rem}
