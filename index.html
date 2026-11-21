@@ -27,7 +27,8 @@
 </head>
 <body>
 
-<nav aria-label="Principal"><b>Cabañas Mirador de Ézaro</b><span><a href="#cabanas-jacuzzi">Cabañas</a><a href="specialpack.html">Packs</a><a href="bono-regalo.html">Bono regalo</a><a href="#contacto">Contacto</a></span></nav>
+<nav aria-label="Principal"><b>Cabañas Mirador de Ézaro</b><span><a href="#cabanas-jacuzzi">Cabañas</a><a href="specialpack.html">Packs y ofertas</a><a href="bono-regalo.html">Bono regalo</a><a href="#contacto">Contacto</a></span></nav>
+<a class="medalla" href="escapada-romantica.html" aria-label="Escapada romántica con jacuzzi y cena"><small>Escapada romántica</small><b data-oferta-precio="romantica"></b><small>con cena</small></a>
 
 <header class="hero"><div class="wrap">
 <h1>Cabañas con jacuzzi cerca de O Ézaro, Costa da Morte</h1>
@@ -37,12 +38,16 @@
     <div><label for="ent">Entrada</label><input type="date" id="ent"></div>
     <div><label for="sal">Salida</label><input type="date" id="sal"></div>
   </div>
-  <label for="per">Personas</label>
-  <select id="per"></select>
+  <div class="row">
+    <div><label for="adu">Adultos <small>(14 años o más)</small></label><select id="adu"></select></div>
+    <div><label for="nin">Niños <small>(de 2 a 13 años)</small></label><select id="nin"></select></div>
+  </div>
+  <p class="aviso" style="margin:.3rem 0 0">Los menores de 2 años no cuentan.</p>
+  <label class="chk" for="mascota"><input type="checkbox" id="mascota"> Viajo con mascota (solo cabañas sin jacuzzi)</label>
   <label class="chk" for="soloJacuzzi"><input type="checkbox" id="soloJacuzzi"> Solo cabañas con jacuzzi</label>
   <button class="btn" id="btnBuscar" type="button">Ver disponibilidad</button>
   <div id="avisoCarga" role="status">⏳ Cargando la disponibilidad, puede tardar hasta un minuto. Si no aparece, recarga la página.</div>
-  <p class="aviso">💶 Reserva con solo <span data-anticipo></span> · el resto, en destino</p>
+  <p class="aviso">💶 Reserva con solo <span data-anticipo-corto></span> · el resto, en destino</p>
 </form>
 </div></header>
 
@@ -61,7 +66,7 @@
   <label for="telefono">Teléfono</label><input type="tel" id="telefono" placeholder="Teléfono" autocomplete="tel">
   <label for="email">Email</label><input type="email" id="email" placeholder="Email" autocomplete="email">
   <div class="cond">
-    <p>✅ Con el anticipo de <span data-anticipo></span> confirmas tu reserva. El resto se paga en destino.</p>
+    <p>✅ Con la señal (<span data-anticipo-corto></span> para 1 o 2 noches, <span data-anticipo-largo></span> desde 3 noches) confirmas tu reserva. El resto se paga en destino.</p>
     <p>🔄 Cancelación gratis hasta 15 días antes de la llegada.</p>
     <p>🕒 Entrada a partir de las 16:00 · Salida antes de las 12:00</p>
   </div>
@@ -146,9 +151,9 @@
 </div></section>
 
 <section id="regalos" aria-labelledby="h-reg"><div class="wrap">
-<h2 id="h-reg">Packs románticos y bono regalo</h2>
+<h2 id="h-reg">Packs, ofertas y bono regalo</h2>
 <div class="regala">
-<a class="regala-card" href="specialpack.html"><span class="ico">🌹</span><h3>Packs románticos</h3><p>Decoración, cena de picoteo y detalles de bienvenida para tu estancia. Se añaden al reservar y se pagan en destino.</p><span class="more">Ver los packs →</span></a>
+<a class="regala-card" href="specialpack.html"><span class="ico">🌹</span><h3>Packs y ofertas</h3><p>Escapada romántica, escapada entre semana, pack familiar y packs de decoración y cena para añadir a tu reserva.</p><span class="more">Ver packs y ofertas →</span></a>
 <a class="regala-card" href="bono-regalo.html"><span class="ico">🎁</span><h3>Bono regalo</h3><p>Regala una o dos noches con desayuno incluido. Compra online, de forma segura, con Stripe.</p><span class="more">Regalar una escapada →</span></a>
 </div>
 </div></section>
@@ -187,14 +192,17 @@
 </main>
 
 <footer>
-<p><a href="specialpack.html">Packs</a> | <a href="bono-regalo.html">Bono regalo</a></p>
+<p><a href="specialpack.html">Packs y ofertas</a> | <a href="escapada-romantica.html">Escapada romántica</a> | <a href="escapada-entre-semana.html">Escapada entre semana</a> | <a href="pack-familiar.html">Pack familiar</a> | <a href="bono-regalo.html">Bono regalo</a></p>
 <p><a href="aviso-legal.html">Aviso legal</a> | <a href="privacidad.html">Política de privacidad</a> | <a href="cookies.html">Política de cookies</a></p>
-<p>© 2026 cabanasmiradordeezaro.es · O Fieiro, Mazaricos (A Coruña)</p>
+<p id="secretoAdmin">© 2026 cabanasmiradordeezaro.es · O Fieiro, Mazaricos (A Coruña)</p>
 </footer>
 
 <a href="#" class="js-wa" id="whatsappButton" target="_blank" rel="noopener" title="Escríbenos por WhatsApp" aria-label="Escríbenos por WhatsApp">💬</a>
 
+<a id="adminButton" href="admin.html" title="Administrador" aria-label="Administrador">🔒</a>
 <script src="js/config.js"></script>
+<script src="js/precios.js"></script>
+<script src="js/medalla.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
