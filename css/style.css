@@ -132,15 +132,6 @@ nav span{display:flex;flex-wrap:wrap;gap:.2rem 0}
 .ok-list{list-style:none;padding:0;margin:.6rem 0}
 .ok-list li{margin:.45rem 0;padding-left:1.7rem;position:relative}
 .ok-list li::before{content:"✓";position:absolute;left:0;color:var(--mid);font-weight:700}
-.medalla{position:fixed;top:5rem;right:.6rem;z-index:60;width:124px;height:124px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;line-height:1.1;color:#4a2f00;background:radial-gradient(circle at 30% 22%,#fff1b8,#f0c239 52%,#b8860b);border:2px solid #fff3c4;box-shadow:0 4px 14px rgba(0,0,0,.4),inset 0 0 0 3px rgba(255,255,255,.5);transform:rotate(8deg)}
-.medalla::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px dashed rgba(240,194,57,.95);pointer-events:none}
-.m-txt{display:flex;flex-direction:column;align-items:center;padding:0 10px 0 18px;margin-top:-4px}
-.medalla small{font-size:11px;font-weight:600;line-height:1.1}
-.medalla b{font:600 1.5rem Fraunces,Georgia,serif;margin:.1rem 0}
-.medalla img{position:absolute;left:-20px;bottom:-14px;width:50px;height:50px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.45);transform:rotate(-8deg)}
-@media (prefers-reduced-motion:no-preference){.medalla{animation:latido 3.2s ease-in-out infinite}}
-@keyframes latido{0%,100%{transform:rotate(8deg) scale(1)}50%{transform:rotate(8deg) scale(1.06)}}
-@media (max-width:640px){.hero h1,.hero .wrap>p,.hero .crumbs{padding-right:8.6rem}}
 .carrusel{position:relative;max-width:38rem;margin:0 0 1.2rem;border-radius:16px;overflow:hidden;background:var(--soft)}
 .car-pista{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .car-pista::-webkit-scrollbar{display:none}
@@ -158,3 +149,27 @@ nav span{display:flex;flex-wrap:wrap;gap:.2rem 0}
 .ph-foto{position:relative;display:block;height:170px;overflow:hidden}
 .ph-foto img{width:100%;height:100%;object-fit:cover;display:block}
 .ph-tag{position:absolute;left:.7rem;bottom:.6rem;background:rgba(0,0,0,.62);color:#fff;border-radius:999px;padding:.15rem .7rem;font-size:.8rem}
+/* ---------- MENÚ FIJO con botones naranjas ---------- */
+html{scroll-padding-top:5.5rem}
+nav{position:sticky;top:0;z-index:100;display:block;background:#17404a;padding:.45rem .8rem .55rem;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+nav b{display:block;font:600 1rem Fraunces,Georgia,serif;margin:0 0 .4rem;color:#fff}
+nav span{display:flex;flex-wrap:nowrap;gap:.35rem}
+nav span a{flex:1 1 auto;margin:0;text-align:center;text-decoration:none;font:600 .8rem "DM Sans",system-ui,sans-serif;white-space:nowrap;background:#e07b00;color:#2b1600;border-radius:8px;padding:.5rem .45rem}
+nav span a:hover,nav span a:focus-visible{background:#f08f1a}
+.btn{color:#2b1600}
+.btn.wa{color:#fff}
+/* ---------- BORDE DE MADERA en las fichas de cabaña y botón Ver cabaña ---------- */
+.cabin{border:3px solid #8a5a2b}
+.more{display:block;text-align:center;margin-top:.5rem;background:#e07b00;color:#2b1600!important;font-weight:600;font-size:1rem!important;text-decoration:none;border-radius:10px;padding:.7rem .8rem}
+.more:hover{background:#f08f1a}
+/* ---------- MEDALLA ---------- */
+.medalla{position:fixed;top:5.4rem;right:.6rem;z-index:60;width:112px;height:112px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;line-height:1.1;color:#4a2f00;background:radial-gradient(circle at 30% 22%,#fff1b8,#f0c239 52%,#b8860b);border:2px solid #fff3c4;box-shadow:0 4px 14px rgba(0,0,0,.4),inset 0 0 0 3px rgba(255,255,255,.5);transform:rotate(8deg)}
+.medalla::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px dashed rgba(240,194,57,.95);pointer-events:none}
+.m-txt{display:flex;flex-direction:column;align-items:center;padding:0 8px 0 16px;margin-top:-5px}
+.medalla small{font-size:11px;font-weight:600;line-height:1.1}
+.medalla small:first-child{font-weight:700}
+.medalla b{font:600 1.4rem Fraunces,Georgia,serif;margin:.1rem 0 0}
+.medalla img{position:absolute;left:-20px;bottom:-14px;width:50px;height:50px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.45);transform:rotate(-8deg)}
+@media (prefers-reduced-motion:no-preference){.medalla{animation:latido 3.2s ease-in-out infinite}}
+@keyframes latido{0%,100%{transform:rotate(8deg) scale(1)}50%{transform:rotate(8deg) scale(1.06)}}
+@media (max-width:640px){.hero h1,.hero .wrap>p,.hero .crumbs{padding-right:7.6rem}}
