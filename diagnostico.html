@@ -1,1 +1,120 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Diagnóstico de la web</title>
+<style>
+body{font:16px/1.5 system-ui,sans-serif;margin:0;padding:1rem;background:#0f1a1d;color:#e6efee}
+h1{font-size:1.3rem;margin:.2rem 0 .6rem}
+h2{font-size:1rem;margin:1.2rem 0 .4rem;color:#8cc6d2}
+ul{list-style:none;padding:0;margin:0}
+li{padding:.45rem .6rem;border-radius:8px;margin:.3rem 0;background:#15262b;word-break:break-word}
+li.ok{border-left:5px solid #2e9e55}
+li.mal{border-left:5px solid #d93a3a;background:#2b1717}
+li.aviso{border-left:5px solid #e0a800}
+small{color:#9db3b0}
+#resumen{font-size:1.1rem;font-weight:600;padding:.8rem;border-radius:10px;background:#15262b;margin:.6rem 0}
+</style>
+</head>
+<body>
+<h1>Diagnóstico de la web</h1>
+<p><small id="donde"></small></p>
+<div id="resumen">Comprobando…</div>
+<div id="salida"></div>
+<script>
+const salida = document.getElementById("salida");
+let problemas = 0, seccion = null;
+function titulo(t) { const h = document.createElement("h2"); h.textContent = t; salida.appendChild(h); seccion = document.createElement("ul"); salida.appendChild(seccion); }
+function linea(tipo, texto) {
+  if (tipo === "mal") problemas++;
+  const li = document.createElement("li"); li.className = tipo; li.textContent = (tipo === "ok" ? "✅ " : tipo === "mal" ? "❌ " : "⚠️ ") + texto;
+  seccion.appendChild(li);
+}
+const sinCache = u => u + (u.includes("?") ? "&" : "?") + "t=" + Date.now();
+async function texto(u) {
+  const r = await fetch(sinCache(u), { cache: "no-store" });
+  return { ok: r.ok, status: r.status, txt: r.ok ? await r.text() : "" };
+}
+function cargarScript(u) {
+  return new Promise(res => {
+    const s = document.createElement("script");
+    s.src = sinCache(u); s.onload = () => res(true); s.onerror = () => res(false);
+    document.head.appendChild(s);
+  });
+}
+
+// Qué debe contener cada archivo para ser la versión última
+const REVISAR = {
+  "js/precios.js": ["OFERTAS", "ANTICIPO_CORTO", "TEMPORADA_ALTA", "DESCUENTOS"],
+  "js/main.js": ["archivosQueFaltan", "calcularNormal", "precioOferta", "ultimoError"],
+  "js/config.js": ["JSONBIN_ID", "CABANAS", "TELEFONO_WA"],
+  "js/medalla.js": ["data-oferta-precio", "OFERTAS"],
+  "js/carrusel.js": ["car-pista"],
+  "js/extras.js": ["BONOS", "data-anticipo-corto"],
+  "js/cabana.js": ["PRECIOS"],
+  "css/style.css": [".medalla", "position:sticky", ".car-pista", ".cabin{border:3px solid #8a5a2b}"],
+  "index.html": ["js/precios.js", "js/medalla.js", 'id="adu"', 'id="mascota"', "images/medalla.jpg"],
+};
+
+(async () => {
+  document.getElementById("donde").textContent = location.href + " · " + new Date().toLocaleString("es-ES");
+
+  titulo("1. Archivos en el servidor (la copia real, sin caché)");
+  const contenidos = {};
+  for (const [archivo, claves] of Object.entries(REVISAR)) {
+    try {
+      const r = await texto(archivo);
+      if (!r.ok) { linea("mal", archivo + ": no se encuentra (error " + r.status + "). Hay que subirlo."); continue; }
+      contenidos[archivo] = r.txt;
+      const faltan = claves.filter(c => !r.txt.includes(c));
+      if (faltan.length) linea("mal", archivo + ": es una versión ANTIGUA (le falta «" + faltan[0] + "»). Hay que volver a subir la última.");
+      else linea("ok", archivo + ": versión correcta (" + Math.round(r.txt.length / 1024 * 10) / 10 + " KB)");
+    } catch (e) { linea("mal", archivo + ": no se pudo leer (" + e.message + ")"); }
+  }
+  for (const f of ["images/medalla.jpg", "images/cabana-noa-interior-jacuzzi-dormitorio.webp", "images/cabana-monica-dormitorio-ventanal-bosque.jpg"]) {
+    try { const r = await fetch(sinCache(f), { cache: "no-store" }); linea(r.ok ? "ok" : "aviso", f + (r.ok ? ": está" : ": no está (error " + r.status + ")")); }
+    catch (e) { linea("aviso", f + ": no se pudo comprobar"); }
+  }
+
+  titulo("2. Los scripts se ejecutan bien");
+  const okConfig = await cargarScript("js/config.js");
+  const okPrecios = await cargarScript("js/precios.js");
+  linea(okConfig ? "ok" : "mal", "config.js se carga");
+  linea(okPrecios ? "ok" : "mal", "precios.js se carga");
+  const globales = { PRECIOS: () => PRECIOS, OFERTAS: () => OFERTAS, TEMPORADA_ALTA: () => TEMPORADA_ALTA, ANTICIPO_CORTO: () => ANTICIPO_CORTO, PACKS: () => PACKS, BONOS: () => BONOS, CABANAS: () => CABANAS, BACKEND_URL: () => BACKEND_URL };
+  for (const [n, f] of Object.entries(globales)) { try { f(); linea("ok", "Existe «" + n + "»"); } catch (e) { linea("mal", "Falta «" + n + "» (archivo antiguo o con error)"); } }
+  try {
+    linea(typeof OFERTAS !== "undefined" && OFERTAS.romantica.precio ? "ok" : "mal", "Precio de la medalla: " + (OFERTAS.romantica.precio) + " €");
+  } catch (e) { linea("mal", "No se puede leer el precio de la medalla: precios.js antiguo."); }
+
+  titulo("3. Disponibilidad (JSONBin)");
+  try {
+    linea(/^PEGA/.test(JSONBIN_ID) ? "mal" : "ok", "ID del bin en config.js: " + JSONBIN_ID);
+    const t0 = performance.now();
+    const r = await fetch(sinCache(BACKEND_URL), { cache: "no-store" });
+    const ms = Math.round(performance.now() - t0);
+    if (!r.ok) {
+      let msg = ""; try { msg = (await r.json()).message || ""; } catch (e) {}
+      linea("mal", "JSONBin responde con error " + r.status + (msg ? ": " + msg : "") + (r.status === 429 ? " (demasiadas peticiones: se ha alcanzado el límite)" : r.status === 401 || r.status === 403 ? " (el bin no es público)" : r.status === 404 ? " (el ID del bin no es correcto)" : ""));
+    } else {
+      const d = await r.json(); const reg = d.record || d;
+      linea("ok", "JSONBin responde bien en " + ms + " ms");
+      const ids = ["monica", "ainhoa", "raquel", "hugo", "noa", "andrea", "paula", "albores", "amoa", "opindo", "xallas", "aruna"];
+      const faltan = ids.filter(i => !Array.isArray(reg[i]));
+      linea(faltan.length ? "aviso" : "ok", faltan.length ? "Al bin le faltan estas cabañas: " + faltan.join(", ") : "El bin tiene las 12 cabañas");
+      linea("ok", "Noches ocupadas guardadas: " + ids.reduce((s, i) => s + (reg[i] || []).length, 0));
+    }
+  } catch (e) { linea("mal", "No se pudo conectar con JSONBin: " + e.message); }
+
+  titulo("4. Caché del navegador");
+  linea("aviso", "Si todo sale en verde pero la web falla, ábrela en una pestaña de incógnito: GitHub guarda los archivos unos 10 minutos.");
+
+  const r = document.getElementById("resumen");
+  r.textContent = problemas === 0 ? "✅ Todo correcto. Si la web falla, es por la caché: abre en incógnito." : "❌ Hay " + problemas + " problema" + (problemas === 1 ? "" : "s") + ". Mira los puntos en rojo.";
+})();
+</script>
+</body>
+</html>
