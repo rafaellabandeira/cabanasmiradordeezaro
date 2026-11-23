@@ -1,4 +1,3 @@
-
 // ================= PRECIOS.JS - CABAÑAS MIRADOR DE ÉZARO =================
 // ÚNICO archivo para cambiar precios, descuentos, ofertas, packs y bonos.
 // No hace falta tocar main.js ni config.js para esto. Importes en euros.
@@ -72,13 +71,13 @@ const JACUZZI_8 = ["monica", "ainhoa", "raquel", "hugo", "noa", "andrea", "paula
 const OFERTAS = {
   romantica: { corto: "Escapada romántica", precio: 290, cabanas: JACUZZI_8, url: "escapada-romantica.html",
     nombre: "Escapada romántica con jacuzzi y cena",
-    incluye: "2 noches, desayuno y cena de picoteo (jamón, queso y vino Ribeiro)" },
+    incluye: "2 noches, desayuno en recepción (para llevar a la cabaña) y cena de picoteo en la cabaña (jamón, queso y vino Ribeiro)" },
   semana: { corto: "Escapada entre semana", precio: 250, cabanas: JACUZZI_8, url: "escapada-entre-semana.html",
     nombre: "Escapada entre semana con jacuzzi y cena picoteo en la cabaña",
-    incluye: "2 noches de domingo a jueves, desayuno y cena de picoteo en la cabaña" },
+    incluye: "2 noches de domingo a jueves, desayuno en recepción (para llevar a la cabaña) y cena de picoteo en la cabaña" },
   familiar: { corto: "Pack familiar", precio: 340, cabanas: ["ainhoa", "raquel", "hugo", "noa", "andrea", "paula"], url: "pack-familiar.html",
     nombre: "Pack familiar: cabaña en los árboles con jacuzzi",
-    incluye: "2 noches (viernes y sábado), niños y desayuno incluidos" },
+    incluye: "2 noches (viernes y sábado), niños incluidos y desayuno en recepción (para llevar a la cabaña)" },
 };
 
 // ---------- BONOS REGALO (enlaces de pago de Stripe) ----------
