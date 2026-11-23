@@ -2,7 +2,7 @@
 // Motor de reservas: disponibilidad, precios, ofertas y reserva.
 // Requiere js/config.js y js/precios.js (cargados antes). Aquí no hay precios.
 
-const POR_ID = Object.fromEntries(CABANAS.map(c => [c.id, c]));
+const POR_ID = typeof CABANAS === "undefined" ? {} : Object.fromEntries(CABANAS.map(c => [c.id, c]));
 
 // ---------- UTILIDADES ----------
 const $ = id => document.getElementById(id);
@@ -23,6 +23,7 @@ const euros = n => Math.round(n) + " €";
 let bloqueadas = null;     // { id: Set de noches ocupadas o bloqueadas }
 let cargaFallida = true;
 let reintentos = 0;
+let ultimoError = "";
 
 async function cargarReservasBackend() {
   try {
@@ -50,6 +51,7 @@ async function cargarReservasBackend() {
     return r;
   } catch (err) {
     console.error(err);
+    ultimoError = err.name === "AbortError" ? "tiempo de espera agotado" : (err.message || "sin conexión");
     return null;
   }
 }
@@ -57,8 +59,13 @@ async function cargarReservasBackend() {
 async function prepararDisponibilidad() {
   cargaFallida = true;
   $("avisoCarga").style.display = "block";
+  if (/^PEGA/.test(JSONBIN_ID)) {
+    $("avisoCarga").textContent = "⚠️ Falta poner el ID del bin de JSONBin en config.js.";
+    return;
+  }
   const r = await cargarReservasBackend();
   if (!r) {
+    $("avisoCarga").innerHTML = `⏳ No conseguimos cargar la disponibilidad todavía. Reintentando… Si no aparece, recarga la página o <a href="https://wa.me/${TELEFONO_WA}" target="_blank" rel="noopener">escríbenos por WhatsApp</a>. <small>(${ultimoError})</small>`;
     if (reintentos++ < 8) setTimeout(prepararDisponibilidad, 15000);
     return;
   }
@@ -264,7 +271,7 @@ function bloqueUnaNoche() {
 function buscar() {
   $("pasoDatos").style.display = "none";
   seleccion = null;
-  if (cargaFallida) { mostrarMensaje("⏳ Todavía estamos cargando la disponibilidad. Espera unos segundos e inténtalo de nuevo."); return; }
+  if (cargaFallida) { mostrarMensaje("⏳ Todavía estamos cargando la disponibilidad. Espera unos segundos e inténtalo de nuevo." + (ultimoError ? " <small>(" + ultimoError + ")</small>" : "")); return; }
   const e = $("ent").value, s = $("sal").value;
   if (!e || !s) { mostrarMensaje("Elige la fecha de entrada y la de salida."); return; }
   const inicio = aFecha(e), fin = aFecha(s);
@@ -416,31 +423,51 @@ function iniciarCandado() {
   });
 }
 
+// Comprueba que están todos los archivos (si se sube uno nuevo y otro no, se avisa en vez de quedarse parado)
+function archivosQueFaltan() {
+  const pruebas = {
+    "precios.js": () => [PRECIOS, TEMPORADA_ALTA, OFERTAS, ANTICIPO_CORTO, DESCUENTOS, PACKS, MASCOTA, SIN_JACUZZI],
+    "config.js": () => [CABANAS, BACKEND_URL, TELEFONO_WA],
+  };
+  const faltan = [];
+  for (const [archivo, f] of Object.entries(pruebas)) { try { f(); } catch (e) { faltan.push(archivo); } }
+  return faltan;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  iniciarCandado();
-  prepararOcupacion();
-  pintarPacks();
-  const hoy = fechaLocal(new Date());
-  $("ent").min = hoy; $("sal").min = hoy;
-  $("ent").addEventListener("change", () => {
-    if (!$("ent").value) return;
-    const ent = aFecha($("ent").value);
-    $("sal").min = fechaLocal(sumarDias(ent, 1));
-    if (!$("sal").value || aFecha($("sal").value) <= ent) $("sal").value = fechaLocal(sumarDias(ent, 2));
+  const faltan = archivosQueFaltan();
+  if (faltan.length) {
+    $("avisoCarga").style.display = "block";
+    $("avisoCarga").textContent = "⚠️ Falta actualizar en GitHub: " + faltan.join(" y ") + ". Sube de nuevo todos los archivos y recarga la página.";
+    return;
+  }
+  const seguro = f => { try { f(); } catch (e) { console.error(e); } };
+  prepararDisponibilidad();     // lo primero: que ningún otro fallo impida cargar la disponibilidad
+  seguro(iniciarCandado);
+  seguro(prepararOcupacion);
+  seguro(pintarPacks);
+  seguro(() => {
+    const hoy = fechaLocal(new Date());
+    $("ent").min = hoy; $("sal").min = hoy;
+    $("ent").addEventListener("change", () => {
+      if (!$("ent").value) return;
+      const ent = aFecha($("ent").value);
+      $("sal").min = fechaLocal(sumarDias(ent, 1));
+      if (!$("sal").value || aFecha($("sal").value) <= ent) $("sal").value = fechaLocal(sumarDias(ent, 2));
+    });
+    $("btnBuscar").addEventListener("click", buscar);
+    $("resultados").addEventListener("click", e => {
+      const b = e.target.closest("[data-reservar]");
+      if (b) { elegirCabana(b.getAttribute("data-reservar"), b.getAttribute("data-oferta") || ""); return; }
+      if (e.target.closest("#btnDosNoches") && busqueda) {
+        $("sal").value = fechaLocal(sumarDias(busqueda.inicio, 2));
+        buscar();
+      }
+    });
+    $("btnPagar").addEventListener("click", reservar);
   });
-  $("btnBuscar").addEventListener("click", buscar);
-  $("resultados").addEventListener("click", e => {
-    const b = e.target.closest("[data-reservar]");
-    if (b) { elegirCabana(b.getAttribute("data-reservar"), b.getAttribute("data-oferta") || ""); return; }
-    if (e.target.closest("#btnDosNoches") && busqueda) {
-      $("sal").value = fechaLocal(sumarDias(busqueda.inicio, 2));
-      buscar();
-    }
-  });
-  $("btnPagar").addEventListener("click", reservar);
-  pintarTextos();
-  document.querySelectorAll(".js-wa").forEach(a => {
+  seguro(pintarTextos);
+  seguro(() => document.querySelectorAll(".js-wa").forEach(a => {
     a.href = "https://wa.me/" + TELEFONO_WA + "?text=" + encodeURIComponent("Hola, quiero información sobre las cabañas.");
-  });
-  prepararDisponibilidad();
+  }));
 });
