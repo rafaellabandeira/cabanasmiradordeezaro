@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -59,6 +58,13 @@ const REVISAR = {
   "index.html": ["js/precios.js", "js/medalla.js", 'id="adu"', 'id="mascota"', "images/medalla.jpg"],
 };
 
+// Cosas que NO debe tener un archivo (si las tiene, es una versión vieja)
+const PROHIBIDO = {
+  "js/config.js": ["const PACKS", "const BONOS", "precio:", "const ANTICIPO"],
+};
+const erroresJS = [];
+window.addEventListener("error", e => { if (e.message) erroresJS.push(e.message + (e.filename ? " (" + e.filename.split("/").pop().split("?")[0] + ")" : "")); });
+
 (async () => {
   document.getElementById("donde").textContent = location.href + " · " + new Date().toLocaleString("es-ES");
 
@@ -70,7 +76,9 @@ const REVISAR = {
       if (!r.ok) { linea("mal", archivo + ": no se encuentra (error " + r.status + "). Hay que subirlo."); continue; }
       contenidos[archivo] = r.txt;
       const faltan = claves.filter(c => !r.txt.includes(c));
-      if (faltan.length) linea("mal", archivo + ": es una versión ANTIGUA (le falta «" + faltan[0] + "»). Hay que volver a subir la última.");
+      const sobran = (PROHIBIDO[archivo] || []).filter(c => r.txt.includes(c));
+      if (sobran.length) linea("mal", archivo + ": es la versión ANTIGUA (todavía lleva «" + sobran[0] + "», que ahora está en precios.js y choca). Hay que volver a subir la última.");
+      else if (faltan.length) linea("mal", archivo + ": es una versión ANTIGUA (le falta «" + faltan[0] + "»). Hay que volver a subir la última.");
       else linea("ok", archivo + ": versión correcta (" + Math.round(r.txt.length / 1024 * 10) / 10 + " KB)");
     } catch (e) { linea("mal", archivo + ": no se pudo leer (" + e.message + ")"); }
   }
@@ -84,6 +92,7 @@ const REVISAR = {
   const okPrecios = await cargarScript("js/precios.js");
   linea(okConfig ? "ok" : "mal", "config.js se carga");
   linea(okPrecios ? "ok" : "mal", "precios.js se carga");
+  if (erroresJS.length) erroresJS.forEach(m => linea("mal", "Error de JavaScript: " + m));
   const globales = { PRECIOS: () => PRECIOS, OFERTAS: () => OFERTAS, TEMPORADA_ALTA: () => TEMPORADA_ALTA, ANTICIPO_CORTO: () => ANTICIPO_CORTO, PACKS: () => PACKS, BONOS: () => BONOS, CABANAS: () => CABANAS, BACKEND_URL: () => BACKEND_URL };
   for (const [n, f] of Object.entries(globales)) { try { f(); linea("ok", "Existe «" + n + "»"); } catch (e) { linea("mal", "Falta «" + n + "» (archivo antiguo o con error)"); } }
   try {
